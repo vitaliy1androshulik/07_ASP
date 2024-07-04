@@ -1,0 +1,74 @@
+﻿@using _03_SecondHomeWorkViewModel.Controllers
+
+@model List<Mercedes> 
+<style>
+
+</style>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Model</th>
+            <th scope="col">Class</th>
+            <th scope="col">Year</th>
+            <th scope="col">Volume</th>
+            <th scope="col">Horse Power</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th scope="row">@i.Id</th>
+                <td>@i.BrandOfCar @i.Model
+                @if(i.Discount>0)
+                {
+                        <span class="badge bg-success">SALE</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Not sale</span>
+                    }
+                </td>
+                <td>@i.Class</td>
+                <td>@i.Year</td>
+                <td><b>@i.Volume L.</b></td>
+                <td>@if(i.HorsePower>100&&i.HorsePower<200)
+                    {
+                        <span class="badge bg-success">@i.HorsePower hp.</span>
+                    }
+                    else if (i.HorsePower > 200 && i.HorsePower < 300)
+                    {
+                        <span class="badge bg-warning">@i.HorsePower hp.</span>
+                    }
+                    else if (i.HorsePower > 300)
+                    {
+                        <span class="badge bg-danger">@i.HorsePower hp.</span>
+                    }
+                </td>
+                <td>@if(i.Discount>0)
+                    {
+                        <del>@i.Price</del>
+                        <span>@(i.Price - ((i.Price * i.Discount) / 100))₴</span>
+                    }
+                    else
+                    {
+                        <span>@i.Price₴</span>
+                    }
+                </td>
+                <td>
+                    @if (i.Discount > 0)
+                    {
+                        <span class="badge bg-success">@i.Discount%</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@i.Discount%</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
