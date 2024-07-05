@@ -1,4 +1,4 @@
-﻿@using _03_SecondHomeWorkViewModel.Controllers
+﻿@using _03_SecondHomeWorkViewModel.Entities
 
 @model List<Mercedes> 
 <style>
@@ -15,6 +15,7 @@
             <th scope="col">Horse Power</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -68,7 +69,11 @@
                         <span class="badge bg-secondary">@i.Discount%</span>
                     }
                 </td>
+                <td><a class="btn btn-outline-danger" asp-controller="Catalog" asp-action="Delete"
+                asp-route-id="@i.Id">
+                    <i class="bi bi-x-lg"></i></a></td>
             </tr>
+            
         }
     </tbody>
 </table>
