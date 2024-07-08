@@ -1,0 +1,44 @@
+﻿@model Mercedes
+
+<form class="row g-3" asp-action="Create">
+    <div class="col-md-6">
+        <label asp-for=Model class="form-label">Model</label>
+        <input asp-for=Model type="text" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Class  class="form-label">Class</label>
+        <input asp-for=Class type="text" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Price class="form-label">Price</label>
+        <input asp-for=Price type="number" class="form-control" >
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Discount  class="form-label">Discount</label>
+        <input asp-for=Discount type="number" class="form-control">
+    </div>
+    <div class="col-md-5">
+        <label asp-for=HorsePower  class="form-label">Horse Power</label>
+        <input asp-for=HorsePower type="number" class="form-control">
+    </div>
+    <div class="col-md-4">
+        <label asp-for=Volume class="form-label">Volume</label>
+        <input asp-for=Volume type="number" step="0.1" class="form-control">
+    </div>
+    <div class="col-md-3">
+        <label asp-for=Year  class="form-label">Year</label>
+        <input asp-for=Year type="number" class="form-control">
+    </div>
+    <div class="col-md-5">
+        <label asp-for=BrandOfCarId class="form-label">Brand ID</label>
+        <select asp-items=ViewBag.Brands asp-for=BrandOfCarId class="form-select">
+            <option selected>Choose...</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <a asp-action="Catalog" class="btn btn-secondary">Back</a>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Create</button>
+    </div>
+</form>

@@ -1,6 +1,8 @@
 ﻿using _03_SecondHomeWorkViewModel.Data;
 using _03_SecondHomeWorkViewModel.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace _03_SecondHomeWorkViewModel.Controllers
 {
@@ -13,12 +15,39 @@ namespace _03_SecondHomeWorkViewModel.Controllers
         }
         public IActionResult Catalog()
         {
-            var mercedeses = context.Mercedes.ToList();
+            // load data from database
+            var mercedeses = context.Mercedes
+                .Include(x=>x.BrandOfCar) // LEFT JOIN
+                .ToList();
+
             return View(mercedeses);
+        }
+        //Open create View
+        [HttpGet]
+        public IActionResult Create() // Open create View
+        {
+            // ViewBag - collection of properties that is accessible in View
+            LoadCategories();
+            return View();
+        }
+        //Post and add to database product
+        [HttpPost]
+        public IActionResult Create(Mercedes model2) // Open create View
+        {
+            if(!ModelState.IsValid) 
+            {
+                LoadCategories();
+                return View(model2);
+            }
+            context.Mercedes.Add(model2);
+            context.SaveChanges();
+
+            return RedirectToAction("Catalog");
         }
         public IActionResult Delete(int id)
         {
             var mercedes = context.Mercedes.Find(id);
+
             if(mercedes == null)
             {
                 return NotFound();
@@ -27,6 +56,10 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             context.SaveChanges();
 
             return RedirectToAction("Catalog");
+        }
+        private void LoadCategories()
+        {
+            ViewBag.Brands = new SelectList(context.BrandOfCars.ToList(), "Id", "Name");
         }
     }
 }

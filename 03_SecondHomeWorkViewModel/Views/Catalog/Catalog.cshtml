@@ -2,20 +2,25 @@
 
 @model List<Mercedes> 
 <style>
-
+    .catalog-table 
+    {
+        font-weight:bold;
+    }
 </style>
+
+
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Model</th>
-            <th scope="col">Class</th>
-            <th scope="col">Year</th>
-            <th scope="col">Volume</th>
-            <th scope="col">Horse Power</th>
-            <th scope="col">Price</th>
-            <th scope="col">Discount</th>
-            <th scope="col">Actions</th>
+            <th scope="col" class="text-center">Class</th>
+            <th scope="col" class="text-center">Year</th>
+            <th scope="col" class="text-center">Volume</th>
+            <th scope="col" class="text-center">Horse Power</th>
+            <th scope="col" class="text-center">Price</th>
+            <th scope="col" class="text-center">Discount</th>
+            <th scope="col" class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +28,7 @@
         {
             <tr>
                 <th scope="row">@i.Id</th>
-                <td>@i.BrandOfCar @i.Model
+                <td>@i.BrandOfCar.Name @i.Model
                 @if(i.Discount>0)
                 {
                         <span class="badge bg-success">SALE</span>
@@ -33,10 +38,11 @@
                         <span class="badge bg-secondary">Not sale</span>
                     }
                 </td>
-                <td>@i.Class</td>
-                <td>@i.Year</td>
-                <td><b>@i.Volume L.</b></td>
-                <td>@if(i.HorsePower>100&&i.HorsePower<200)
+                <td class="text-center">@i.Class</td>
+                <td class="text-center">@i.Year</td>
+                <td class="text-center"><b>@i.Volume L.</b></td>
+                <td class="text-center">
+                    @if (i.HorsePower > 100 && i.HorsePower < 200)
                     {
                         <span class="badge bg-success">@i.HorsePower hp.</span>
                     }
@@ -49,7 +55,7 @@
                         <span class="badge bg-danger">@i.HorsePower hp.</span>
                     }
                 </td>
-                <td>@if(i.Discount>0)
+                <td class="text-center">@if(i.Discount>0)
                     {
                         <del>@i.Price</del>
                         <span>@(i.Price - ((i.Price * i.Discount) / 100))₴</span>
@@ -59,7 +65,7 @@
                         <span>@i.Price₴</span>
                     }
                 </td>
-                <td>
+                <td class="text-center">
                     @if (i.Discount > 0)
                     {
                         <span class="badge bg-success">@i.Discount%</span>
@@ -69,7 +75,8 @@
                         <span class="badge bg-secondary">@i.Discount%</span>
                     }
                 </td>
-                <td><a class="btn btn-outline-danger" asp-controller="Catalog" asp-action="Delete"
+                <td class="text-center">
+                    <a class="btn btn-outline-danger" asp-controller="Catalog" asp-action="Delete"
                 asp-route-id="@i.Id">
                     <i class="bi bi-x-lg"></i></a></td>
             </tr>
@@ -77,3 +84,7 @@
         }
     </tbody>
 </table>
+<div class="catalog-table text-end">
+    <a type="button" class="btn btn-primary" asp-action="Create">Add</a>
+</div>
+

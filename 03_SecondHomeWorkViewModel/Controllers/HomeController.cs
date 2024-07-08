@@ -1,21 +1,18 @@
-﻿using _03_SecondHomeWorkViewModel.Models;
+﻿using _03_SecondHomeWorkViewModel.Data;
+using _03_SecondHomeWorkViewModel.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace _03_SecondHomeWorkViewModel.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        private MercedesDbContext context = new MercedesDbContext();
         public IActionResult Index()
         {
-            return View();
+            var mercedes = context.Mercedes.Include(x=>x.BrandOfCar).ToList();
+            return View(mercedes);
         }
 
         public IActionResult Privacy()
