@@ -75,7 +75,13 @@
                         <span class="badge bg-secondary">@i.Discount%</span>
                     }
                 </td>
-                <td class="text-center">
+                <td class="">
+                    <a class="btn btn-outline-warning" asp-controller="Catalog" asp-action="Edit"
+                   asp-route-id="@i.Id">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                </td>
+                <td class="text-start">
                     <a class="btn btn-outline-danger" asp-controller="Catalog" asp-action="Delete"
                 asp-route-id="@i.Id">
                     <i class="bi bi-x-lg"></i></a></td>

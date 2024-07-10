@@ -30,6 +30,30 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             LoadCategories();
             return View();
         }
+        [HttpGet]
+        public IActionResult Edit(int Id) 
+        {
+            var mercedes = context.Mercedes.Find(Id);
+
+            if (mercedes == null) return NotFound();
+            LoadCategories();
+            return View(mercedes);
+        }
+        [HttpPost]
+        public IActionResult Edit(Mercedes model2)
+        {
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View(model2);
+            }
+
+            context.Mercedes.Update(model2);
+            context.SaveChanges();
+
+            return RedirectToAction("Catalog");
+        }
+
         //Post and add to database product
         [HttpPost]
         public IActionResult Create(Mercedes model2) // Open create View
