@@ -17,6 +17,7 @@ namespace _03_SecondHomeWorkViewModel.Data
                 "Integrated Security=True;Connect Timeout=30;Encrypt=False;" +
                 "TrustServerCertificate=False;ApplicationIntent=ReadWrite;" +
                 "MultiSubnetFailover=False");
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

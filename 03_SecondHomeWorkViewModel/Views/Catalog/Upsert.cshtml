@@ -1,0 +1,62 @@
+﻿@model Mercedes
+@{
+    var create = ViewBag.CreateMode;
+}
+<form class="row g-3" asp-action="Create">
+    @*<div class="col-md-12">
+        <label asp-for=Id class="form-label">Id</label>
+        <input asp-for=Id readonly placeholder="Generated" type="number" class="form-control">
+    </div>*@
+    <div class="col-md-6">
+        <label asp-for=Model class="form-label">Model</label>
+        <input asp-for=Model type="text" class="form-control">
+        <span class="small text-danger" asp-validation-for="Model"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Class class="form-label">Class</label>
+        <input asp-for=Class type="text" class="form-control">
+        <span class="small text-danger" asp-validation-for="Class"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Price class="form-label">Price</label>
+        <input asp-for=Price value="0" min="0" type="number" class="form-control">
+        <span class="small text-danger" asp-validation-for="Price"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Discount class="form-label">Discount</label>
+        <input asp-for=Discount value="0" min="0"  max="100" type="number" class="form-control">
+        <span class="small text-danger" asp-validation-for="Discount"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=HorsePower class="form-label">Horse Power</label>
+        <input asp-for=HorsePower value="0" min="0" type="number" class="form-control">
+        <span class="small text-danger" asp-validation-for="HorsePower"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Volume class="form-label">Volume</label>
+        <input asp-for=Volume value="0" min="0" type="number" step="0.1" class="form-control">
+        <span class="small text-danger" asp-validation-for="Volume"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Year class="form-label">Year</label>
+        <input asp-for=Year value="0" min="0" type="number" class="form-control">
+        <span class="small text-danger" asp-validation-for="Year"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=BrandOfCarId class="form-label">Brand</label>
+        <select asp-items=ViewBag.Brands asp-for=BrandOfCarId class="form-select">
+            <option selected>Choose...</option>
+        </select>
+    </div>
+    <div class="">
+        <label asp-for=ImgUrl class="form-label">Img URL</label>
+        <input asp-for=ImgUrl type="text" class="form-control">
+        <span class="small text-danger" asp-validation-for="ImgUrl"></span>
+    </div>
+    <div class="col-6">
+        <a asp-action="Catalog" class="btn btn-secondary w-100"><i class="bi bi-arrow-left"></i> Back</a>
+    </div>
+    <div class="col-6">
+        <button type="submit" class="btn btn-success w-100"> @(create?"Create": "Edit")</button>
+    </div>
+</form>

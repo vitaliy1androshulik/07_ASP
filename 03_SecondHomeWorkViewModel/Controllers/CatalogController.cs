@@ -28,7 +28,8 @@ namespace _03_SecondHomeWorkViewModel.Controllers
         {
             // ViewBag - collection of properties that is accessible in View
             LoadCategories();
-            return View();
+            ViewBag.CreateMode = true;
+            return View("Upsert");
         }
         [HttpGet]
         public IActionResult Edit(int Id) 
@@ -37,7 +38,8 @@ namespace _03_SecondHomeWorkViewModel.Controllers
 
             if (mercedes == null) return NotFound();
             LoadCategories();
-            return View(mercedes);
+            ViewBag.CreateMode = false;
+            return View("Catalog",mercedes);
         }
         [HttpPost]
         public IActionResult Edit(Mercedes model2)
@@ -45,7 +47,8 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             if (!ModelState.IsValid)
             {
                 LoadCategories();
-                return View(model2);
+                ViewBag.CreateMode = false;
+                return View("Upsert",model2);
             }
 
             context.Mercedes.Update(model2);
@@ -61,7 +64,8 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             if(!ModelState.IsValid) 
             {
                 LoadCategories();
-                return View(model2);
+                ViewBag.CreateMode = true;
+                return View("Upsert",model2);
             }
             context.Mercedes.Add(model2);
             context.SaveChanges();

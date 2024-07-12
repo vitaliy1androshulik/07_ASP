@@ -1,13 +1,19 @@
-﻿namespace _03_SecondHomeWorkViewModel.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace _03_SecondHomeWorkViewModel.Entities
 {
     public class Mercedes
     {
         public int Id { get; set; }
-
+        [Required]
         public int BrandOfCarId { get; set; }
         public BrandOfCar? BrandOfCar { get; set; }
-        public string? Model { get; set; }
+
+        [Required]
+        public string Model { get; set; }
+        [Url]
         public string? ImgUrl { get; set; }
+        [Required]
         public int Price { get; set; }
         public string? Class { get; set; }
         public int Year { get; set; }
