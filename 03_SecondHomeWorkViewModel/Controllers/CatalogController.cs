@@ -32,14 +32,15 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             return View("Upsert");
         }
         [HttpGet]
-        public IActionResult Edit(int Id) 
+        public IActionResult Edit(int id) 
         {
-            var mercedes = context.Mercedes.Find(Id);
+            var mercedes = context.Mercedes.Find(id);
 
             if (mercedes == null) return NotFound();
+
             LoadCategories();
             ViewBag.CreateMode = false;
-            return View("Catalog",mercedes);
+            return View("Upsert", mercedes);
         }
         [HttpPost]
         public IActionResult Edit(Mercedes model2)

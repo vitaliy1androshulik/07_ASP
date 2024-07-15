@@ -5,15 +5,15 @@ namespace _03_SecondHomeWorkViewModel.Entities
     public class Mercedes
     {
         public int Id { get; set; }
-        [Required]
+        //[Required]
         public int BrandOfCarId { get; set; }
         public BrandOfCar? BrandOfCar { get; set; }
 
-        [Required]
+        //[Required]
         public string Model { get; set; }
-        [Url]
+        //[Url]
         public string? ImgUrl { get; set; }
-        [Required]
+        //[Required]
         public int Price { get; set; }
         public string? Class { get; set; }
         public int Year { get; set; }
