@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace _03_SecondHomeWorkViewModel.Validators
 {
-    public class CreateValidator:AbstractValidator<Mercedes>
+    public class CreateValidator:AbstractValidator<MercedesModel>
     {
         public CreateValidator()
         {

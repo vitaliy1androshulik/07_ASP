@@ -1,5 +1,6 @@
 ﻿using _03_SecondHomeWorkViewModel.Data;
 using _03_SecondHomeWorkViewModel.Entities;
+using _03_SecondHomeWorkViewModel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,7 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             return View("Upsert", mercedes);
         }
         [HttpPost]
-        public IActionResult Edit(Mercedes model2)
+        public IActionResult Edit(MercedesModel model2)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +61,7 @@ namespace _03_SecondHomeWorkViewModel.Controllers
 
         //Post and add to database product
         [HttpPost]
-        public IActionResult Create(Mercedes model2) // Open create View
+        public IActionResult Create(MercedesModel model2) // Open create View
         {
             if(!ModelState.IsValid) 
             {
@@ -68,6 +69,7 @@ namespace _03_SecondHomeWorkViewModel.Controllers
                 ViewBag.CreateMode = true;
                 return View("Upsert",model2);
             }
+            var entity =mapper.Map<
             context.Mercedes.Add(model2);
             context.SaveChanges();
 
