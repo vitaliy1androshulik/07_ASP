@@ -1,4 +1,5 @@
 ﻿using _03_SecondHomeWorkViewModel.Entities;
+using _03_SecondHomeWorkViewModel.Models;
 using FluentValidation;
 
 namespace _03_SecondHomeWorkViewModel.Validators

@@ -3,9 +3,9 @@ using _03_SecondHomeWorkViewModel.Models;
 using AutoMapper;
 namespace _03_SecondHomeWorkViewModel.MapperProfiles
 {
-    public class AppProfile : Profile
+    public class MercedesDto : Profile
     {
-        public AppProfile()
+        public MercedesDto()
         {
             CreateMap<MercedesModel, Mercedes>().ReverseMap();
         }

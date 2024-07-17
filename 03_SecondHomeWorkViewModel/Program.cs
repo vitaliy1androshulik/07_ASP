@@ -18,8 +18,16 @@ namespace _03_SecondHomeWorkViewModel
             builder.Services.AddFluentValidationClientsideAdapters();
             // Load an assembly reference rather than using a marker type.
             builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            // --------------- configure Auto Mapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-
+            //------------ configure HTTP session
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 

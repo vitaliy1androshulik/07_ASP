@@ -39,7 +39,7 @@
                     </h5>
                     <p class="card-text text-center modelText">@i.Model</p>
                     <p class="card-text text-center priceText"><span>від</span> @i.Price.ToString("N2") грн.</p>
-                    <a href="#" class="btn btn-primary text-center cool-Btn">Купити автомобіль</a>
+                    <a asp-action="Add" asp-controller="Cart" asp-route-id="@i.Id" href="#" class="btn btn-primary text-center cool-Btn">Купити автомобіль</a>
                 </div>
             </div>
         </div>

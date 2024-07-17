@@ -1,6 +1,8 @@
 ﻿using _03_SecondHomeWorkViewModel.Data;
 using _03_SecondHomeWorkViewModel.Entities;
+using _03_SecondHomeWorkViewModel.MapperProfiles;
 using _03_SecondHomeWorkViewModel.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +12,11 @@ namespace _03_SecondHomeWorkViewModel.Controllers
     public class CatalogController : Controller
     {
         public MercedesDbContext context;
-        public CatalogController()
+        private readonly IMapper mapper;
+        public CatalogController(IMapper mapper)
         {
             context = new MercedesDbContext();
+            this.mapper = mapper;
         }
         public IActionResult Catalog()
         {
@@ -21,7 +25,7 @@ namespace _03_SecondHomeWorkViewModel.Controllers
                 .Include(x=>x.BrandOfCar) // LEFT JOIN
                 .ToList();
 
-            return View(mercedeses);
+            return View(mapper.Map<List<MercedesModel>>(mercedeses));
         }
         //Open create View
         [HttpGet]
@@ -32,6 +36,21 @@ namespace _03_SecondHomeWorkViewModel.Controllers
             ViewBag.CreateMode = true;
             return View("Upsert");
         }
+        [HttpPost]
+        public IActionResult Create(MercedesModel model2) // Open create View
+        {
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                ViewBag.CreateMode = true;
+                return View("Upsert", model2);
+            }
+            var entity = mapper.Map<Mercedes>(model2);
+            context.Mercedes.Add(entity);
+            context.SaveChanges();
+
+            return RedirectToAction("Catalog");
+        }
         [HttpGet]
         public IActionResult Edit(int id) 
         {
@@ -41,7 +60,7 @@ namespace _03_SecondHomeWorkViewModel.Controllers
 
             LoadCategories();
             ViewBag.CreateMode = false;
-            return View("Upsert", mercedes);
+            return View("Upsert", mapper.Map<MercedesModel>(mercedes));
         }
         [HttpPost]
         public IActionResult Edit(MercedesModel model2)
@@ -53,28 +72,14 @@ namespace _03_SecondHomeWorkViewModel.Controllers
                 return View("Upsert",model2);
             }
 
-            context.Mercedes.Update(model2);
+            context.Mercedes.Update(mapper.Map<Mercedes>(model2));
             context.SaveChanges();
 
             return RedirectToAction("Catalog");
         }
 
         //Post and add to database product
-        [HttpPost]
-        public IActionResult Create(MercedesModel model2) // Open create View
-        {
-            if(!ModelState.IsValid) 
-            {
-                LoadCategories();
-                ViewBag.CreateMode = true;
-                return View("Upsert",model2);
-            }
-            var entity =mapper.Map<
-            context.Mercedes.Add(model2);
-            context.SaveChanges();
-
-            return RedirectToAction("Catalog");
-        }
+        
         public IActionResult Delete(int id)
         {
             var mercedes = context.Mercedes.Find(id);
