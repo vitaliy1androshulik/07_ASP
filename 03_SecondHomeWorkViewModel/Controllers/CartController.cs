@@ -10,6 +10,7 @@ namespace _03_SecondHomeWorkViewModel.Controllers
         }
         public IActionResult Add()
         {
+            HttpContext.Session.
             return View();
         }
         public IActionResult Remove()
